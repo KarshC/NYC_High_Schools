@@ -1,0 +1,40 @@
+package com.example.nychighschools
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.nychighschools.composables.HighSchoolList
+import com.example.nychighschools.ui.theme.NYCHighSchoolsTheme
+import com.example.nychighschools.viewmodel.NYCSchoolViewModel
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            NYCHighSchoolsTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    HighSchoolList()
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewSchoolList() {
+    HighSchoolList()
+}
