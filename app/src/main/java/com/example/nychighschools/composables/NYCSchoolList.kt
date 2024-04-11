@@ -190,11 +190,12 @@ fun SchoolItem(school: NYCHighSchools) {
 
 @Composable
 fun MyCircularProgressScreen() {
-    Box(contentAlignment = Alignment.Center) {
+    Box(contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize()) {
         // Adjust the size by changing the size parameter
         CircularProgressIndicator(
             modifier = Modifier.size(50.dp), // Adjust the size as needed
-            color = MaterialTheme.colorScheme.inversePrimary
+            color = MaterialTheme.colorScheme.inversePrimary,
         )
     }
 }
