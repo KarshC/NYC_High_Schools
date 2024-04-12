@@ -14,5 +14,5 @@ interface NYCSchoolDao {
     fun getAllSchools(): Flow<List<NYCHighSchools>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllSchools(schools: Array<NYCHighSchools>)
+    suspend fun insertAllSchools(schools: List<NYCHighSchools>)
 }
