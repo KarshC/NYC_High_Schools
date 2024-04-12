@@ -5,6 +5,12 @@
       <entry key="app">
         <State />
       </entry>
+      <entry key="loadError_displays_correctText()">
+        <State />
+      </entry>
+      <entry key="schoolItemExpandAndCollapseOnTap()">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
