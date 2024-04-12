@@ -5,11 +5,10 @@ import com.example.nychighschools.data.db.NYCSchoolDao
 import com.example.nychighschools.data.model.NYCHighSchools
 import com.example.nychighschools.data.service.NYCSchoolApi
 import com.example.nychighschools.util.Result
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class NYCSchoolsRepository @Inject constructor(
@@ -31,12 +30,15 @@ class NYCSchoolsRepository @Inject constructor(
     }
 
     suspend fun refreshSchoolData() {
-        try {
-            val newSchoolData = nycSchoolApi.getSchoolWithSatScores()
-            Log.d("Repository", "Fetched Data: $newSchoolData")
-            nycSchoolDao.insertAllSchools(newSchoolData.toTypedArray())
-        } catch (e: Exception) {
-            Log.e("TAG_SCHOOL_API", "Api error")
+
+        return withContext(Dispatchers.IO) {
+            try {
+                val newSchoolData = nycSchoolApi.getSchoolWithSatScores()
+                Log.d("Repository", "Fetched Data: $newSchoolData")
+                newSchoolData.body()?.let { nycSchoolDao.insertAllSchools(it) }
+            } catch (e: Exception) {
+                Log.e("TAG_SCHOOL_API", "Api error")
+            }
         }
     }
 }
