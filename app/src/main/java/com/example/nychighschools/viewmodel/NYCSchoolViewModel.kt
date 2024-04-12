@@ -6,7 +6,6 @@ import com.example.nychighschools.data.model.NYCHighSchools
 import com.example.nychighschools.data.repository.NYCSchoolsRepository
 import com.example.nychighschools.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -18,13 +17,14 @@ import javax.inject.Inject
 class NYCSchoolViewModel @Inject constructor(
     private val nycSchoolsRepository: NYCSchoolsRepository
 ) : ViewModel() {
-    val nycSchoolsData: StateFlow<Result<List<NYCHighSchools>>> =
+    private val _nycSchoolsData: StateFlow<Result<List<NYCHighSchools>>> =
         nycSchoolsRepository.getSchoolDataFlow()
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),
                 initialValue = Result.Loading
             )
+    val nycSchoolsData = _nycSchoolsData
 
     private val _isRefreshing = MutableStateFlow(false)
     val isRefreshing: StateFlow<Boolean> = _isRefreshing
