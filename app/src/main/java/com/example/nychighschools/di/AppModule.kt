@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.nychighschools.data.db.NYCSchoolDao
 import com.example.nychighschools.data.db.NYCSchoolsDatabase
-import com.example.nychighschools.data.repository.NYCSchoolsRepository
+import com.example.nychighschools.data.repository.NYCSchoolsRepositoryImpl
 import com.example.nychighschools.data.service.NYCSchoolApi
 import dagger.Module
 import dagger.Provides
@@ -65,8 +65,8 @@ object AppModule {
     fun provideNycSchoolRepository(
         nycSchoolApi: NYCSchoolApi,
         nycSchoolDao: NYCSchoolDao
-    ): NYCSchoolsRepository {
-        return NYCSchoolsRepository(nycSchoolApi, nycSchoolDao)
+    ): NYCSchoolsRepositoryImpl {
+        return NYCSchoolsRepositoryImpl(nycSchoolApi, nycSchoolDao)
     }
 }
 

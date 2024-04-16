@@ -11,12 +11,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class NYCSchoolsRepository @Inject constructor(
+class NYCSchoolsRepositoryImpl @Inject constructor(
     private val nycSchoolApi: NYCSchoolApi,
     private val nycSchoolDao: NYCSchoolDao
-) {
+): NYCSchoolRepository {
 
-    fun getSchoolDataFlow(): Flow<Result<List<NYCHighSchools>>> = flow {
+    override fun getSchoolDataFlow(): Flow<Result<List<NYCHighSchools>>> = flow {
         emit(Result.Loading)
         try {
             refreshSchoolData()
@@ -29,7 +29,7 @@ class NYCSchoolsRepository @Inject constructor(
         }
     }
 
-    suspend fun refreshSchoolData() {
+    override suspend fun refreshSchoolData() {
 
         return withContext(Dispatchers.IO) {
             try {

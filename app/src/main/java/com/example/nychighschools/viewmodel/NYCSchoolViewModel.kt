@@ -3,7 +3,7 @@ package com.example.nychighschools.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nychighschools.data.model.NYCHighSchools
-import com.example.nychighschools.data.repository.NYCSchoolsRepository
+import com.example.nychighschools.data.repository.NYCSchoolsRepositoryImpl
 import com.example.nychighschools.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NYCSchoolViewModel @Inject constructor(
-    private val nycSchoolsRepository: NYCSchoolsRepository
+    private val nycSchoolsRepository: NYCSchoolsRepositoryImpl
 ) : ViewModel() {
     private val _nycSchoolsData: StateFlow<Result<List<NYCHighSchools>>> =
         nycSchoolsRepository.getSchoolDataFlow()
